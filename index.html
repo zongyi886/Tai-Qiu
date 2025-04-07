@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <title>台球记分系统</title>
+    <style>
+        /* 自定义一些过渡效果 */
+        .score-change {
+            transition: color 0.3s ease-in-out;
+        }
+
+        /* 调整按钮样式 */
+        .score-button {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-8">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">台球记分系统</h1>
+        <div class="flex flex-wrap -mx-3 mb-6 justify-center">
+            <div class="w-full md:w-1/4 px-3 mb-4 md:mb-0">
+                <input type="text" id="player1-name" placeholder="球员 1 名字" class="border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 w-full">
+            </div>
+            <div class="w-full md:w-1/4 px-3 mb-4 md:mb-0">
+                <input type="text" id="player2-name" placeholder="球员 2 名字" class="border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 w-full">
+            </div>
+            <div class="w-full md:w-1/4 px-3 mb-4 md:mb-0">
+                <input type="text" id="player3-name" placeholder="球员 3 名字" class="border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 w-full">
+            </div>
+            <div class="w-full md:w-1/4 px-3 mb-4 md:mb-0">
+                <input type="text" id="player4-name" placeholder="球员 4 名字" class="border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 w-full">
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- 球员 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <span id="player1-score" class="text-2xl font-bold text-blue-600 score-change">0</span>
+                </div>
+                <div class="flex flex-col space-y-2">
+                    <button id="player1-add-1" class="bg-blue-600 text-white score-button rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">+1</button>
+                    <button id="player1-add-4" class="bg-blue-600 text-white score-button rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">+4</button>
+                    <button id="player1-add-7" class="bg-blue-600 text-white score-button rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">+7</button>
+                    <button id="player1-add-10" class="bg-blue-600 text-white score-button rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">+10</button>
+                    <button id="player1-reset" class="bg-red-600 text-white score-button rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">重置</button>
+                </div>
+            </div>
+            <!-- 球员 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <span id="player2-score" class="text-2xl font-bold text-green-600 score-change">0</span>
+                </div>
+                <div class="flex flex-col space-y-2">
+                    <button id="player2-add-1" class="bg-green-600 text-white score-button rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">+1</button>
+                    <button id="player2-add-4" class="bg-green-600 text-white score-button rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">+4</button>
+                    <button id="player2-add-7" class="bg-green-600 text-white score-button rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">+7</button>
+                    <button id="player2-add-10" class="bg-green-600 text-white score-button rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">+10</button>
+                    <button id="player2-reset" class="bg-red-600 text-white score-button rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">重置</button>
+                </div>
+            </div>
+            <!-- 球员 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <span id="player3-score" class="text-2xl font-bold text-yellow-600 score-change">0</span>
+                </div>
+                <div class="flex flex-col space-y-2">
+                    <button id="player3-add-1" class="bg-yellow-600 text-white score-button rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50">+1</button>
+                    <button id="player3-add-4" class="bg-yellow-600 text-white score-button rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50">+4</button>
+                    <button id="player3-add-7" class="bg-yellow-600 text-white score-button rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50">+7</button>
+                    <button id="player3-add-10" class="bg-yellow-600 text-white score-button rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50">+10</button>
+                    <button id="player3-reset" class="bg-red-600 text-white score-button rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">重置</button>
+                </div>
+            </div>
+            <!-- 球员 4 -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <span id="player4-score" class="text-2xl font-bold text-purple-600 score-change">0</span>
+                </div>
+                <div class="flex flex-col space-y-2">
+                    <button id="player4-add-1" class="bg-purple-600 text-white score-button rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">+1</button>
+                    <button id="player4-add-4" class="bg-purple-600 text-white score-button rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">+4</button>
+                    <button id="player4-add-7" class="bg-purple-600 text-white score-button rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">+7</button>
+                    <button id="player4-add-10" class="bg-purple-600 text-white score-button rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">+10</button>
+                    <button id="player4-reset" class="bg-red-600 text-white score-button rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 获取元素
+        const player1Name = document.getElementById('player1-name');
+        const player2Name = document.getElementById('player2-name');
+        const player3Name = document.getElementById('player3-name');
+        const player4Name = document.getElementById('player4-name');
+
+        const player1Score = document.getElementById('player1-score');
+        const player2Score = document.getElementById('player2-score');
+        const player3Score = document.getElementById('player3-score');
+        const player4Score = document.getElementById('player4-score');
+
+        const player1Add1 = document.getElementById('player1-add-1');
+        const player1Add4 = document.getElementById('player1-add-4');
+        const player1Add7 = document.getElementById('player1-add-7');
+        const player1Add10 = document.getElementById('player1-add-10');
+        const player1Reset = document.getElementById('player1-reset');
+
+        const player2Add1 = document.getElementById('player2-add-1');
+        const player2Add4 = document.getElementById('player2-add-4');
+        const player2Add7 = document.getElementById('player2-add-7');
+        const player2Add10 = document.getElementById('player2-add-10');
+        const player2Reset = document.getElementById('player2-reset');
+
+        const player3Add1 = document.getElementById('player3-add-1');
+        const player3Add4 = document.getElementById('player3-add-4');
+        const player3Add7 = document.getElementById('player3-add-7');
+        const player3Add10 = document.getElementById('player3-add-10');
+        const player3Reset = document.getElementById('player3-reset');
+
+        const player4Add1 = document.getElementById('player4-add-1');
+        const player4Add4 = document.getElementById('player4-add-4');
+        const player4Add7 = document.getElementById('player4-add-7');
+        const player4Add10 = document.getElementById('player4-add-10');
+        const player4Reset = document.getElementById('player4-reset');
+
+        // 初始化得分
+        let score1 = 0;
+        let score2 = 0;
+        let score3 = 0;
+        let score4 = 0;
+
+        // 球员 1 得分操作
+        player1Add1.addEventListener('click', () => {
+            score1 += 1;
+            updateScore(player1Score, score1);
+        });
+        player1Add4.addEventListener('click', () => {
+            score1 += 4;
+            updateScore(player1Score, score1);
+        });
+        player1Add7.addEventListener('click', () => {
+            score1 += 7;
+            updateScore(player1Score, score1);
+        });
+        player1Add10.addEventListener('click', () => {
+            score1 += 10;
+            updateScore(player1Score, score1);
+        });
+        player1Reset.addEventListener('click', () => {
+            score1 = 0;
+            updateScore(player1Score, score1);
+        });
+
+        // 球员 2 得分操作
+        player2Add1.addEventListener('click', () => {
+            score2 += 1;
+            updateScore(player2Score, score2);
+        });
+        player2Add4.addEventListener('click', () => {
+            score2 += 4;
+            updateScore(player2Score, score2);
+        });
+        player2Add7.addEventListener('click', () => {
+            score2 += 7;
+            updateScore(player2Score, score2);
+        });
+        player2Add10.addEventListener('click', () => {
+            score2 += 10;
+            updateScore(player2Score, score2);
+        });
+        player2Reset.addEventListener('click', () => {
+            score2 = 0;
+            updateScore(player2Score, score2);
+        });
+
+        // 球员 3 得分操作
+        player3Add1.addEventListener('click', () => {
+            score3 += 1;
+            updateScore(player3Score, score3);
+        });
+        player3Add4.addEventListener('click', () => {
+            score3 += 4;
+            updateScore(player3Score, score3);
+        });
+        player3Add7.addEventListener('click', () => {
+            score3 += 7;
+            updateScore(player3Score, score3);
+        });
+        player3Add10.addEventListener('click', () => {
+            score3 += 10;
+            updateScore(player3Score, score3);
+        });
+        player3Reset.addEventListener('click', () => {
+            score3 = 0;
+            updateScore(player3Score, score3);
+        });
+
+        // 球员 4 得分操作
+        player4Add1.addEventListener('click', () => {
+            score4 += 1;
+            updateScore(player4Score, score4);
+        });
+        player4Add4.addEventListener('click', () => {
+            score4 += 4;
+            updateScore(player4Score, score4);
+        });
+        player4Add7.addEventListener('click', () => {
+            score4 += 7;
+            updateScore(player4Score, score4);
+        });
+        player4Add10.addEventListener('click', () => {
+            score4 += 10;
+            updateScore(player4Score, score4);
+        });
+        player4Reset.addEventListener('click', () => {
+            score4 = 0;
+            updateScore(player4Score, score4);
+        });
+
+        // 更新得分显示并添加过渡效果
+        function updateScore(element, score) {
+            element.textContent = score;
+            element.classList.add('text-yellow-600');
+            setTimeout(() => {
+                element.classList.remove('text-yellow-600');
+            }, 300);
+        }
+    </script>
+</body>
+
+</html>
+    
